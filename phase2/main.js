@@ -56,6 +56,13 @@ const removeDuplicates = function (arr) {
 
 console.log(removeDuplicates([3, 7, 2, 3, 9, 7, 5, 2, 8]));
 
+const testadd = function (arr) {
+  return arr.filter((item, index) => {
+    return arr.indexOf(item) === index;
+  });
+};
+
+console.log(testadd([3, 7, 2, 3, 9, 7, 5, 2, 8]));
 /*
 2.
 Requirement:
@@ -90,11 +97,17 @@ Return only product names
 */
 
 const groupByCategory = function (products) {
-  const groupsProduct = products.filter((item, index) => {
-    return products.category;
-  });
+  const groupsProduct = products.reduce((acc, item) => {
+    const category = item.category;
+    if(!acc[category]){
+        acc[category] = []
+    }
+    acc[category].push(item);
+    return acc;
+  }, {});
   return groupsProduct;
 };
+
 const products = [
   { name: "Laptop", category: "Electronics" },
   { name: "Phone", category: "Electronics" },
@@ -102,7 +115,6 @@ const products = [
   { name: "Apple", category: "Food" },
 ];
 console.log(groupByCategory(products));
-
 
 /*
 3.
@@ -125,15 +137,9 @@ If multiple values have the same count,
 return all of them.
 */
 
-const findMostFrequent = function(arr) {
+const findMostFrequent = function (arr) {};
 
-};
-
-console.log(
-  findMostFrequent(
-    ["a", "b", "c", "a", "d", "b", "a", "c", "a"]
-  )
-);
+console.log(findMostFrequent(["a", "b", "c", "a", "d", "b", "a", "c", "a"]));
 
 /*
 4.
@@ -153,13 +159,9 @@ Bonus:
 Do not use flat()
 */
 
-const flattenArray = function(arr) {
+const flattenArray = function (arr) {};
 
-};
-
-console.log(
-  flattenArray([1,2,[3,4],[5,6],7])
-);
+console.log(flattenArray([1, 2, [3, 4], [5, 6], 7]));
 
 /*
 5.
@@ -186,9 +188,7 @@ Bonus:
 Return only the names.
 */
 
-const filterAdults = function(users) {
-
-};
+const filterAdults = function (users) {};
 
 console.log(filterAdults(users));
 
@@ -217,9 +217,7 @@ Bonus:
 Also return the failed students.
 */
 
-const checkPass = function(students) {
-
-};
+const checkPass = function (students) {};
 
 console.log(checkPass(students));
 
@@ -245,9 +243,7 @@ Bonus:
 Return the product name(s).
 */
 
-const checkStock = function(products) {
-
-};
+const checkStock = function (products) {};
 
 console.log(checkStock(products));
 
@@ -273,9 +269,7 @@ Bonus:
 Apply a 10% discount before calculating.
 */
 
-const calculateTotal = function(products) {
-
-};
+const calculateTotal = function (products) {};
 
 console.log(calculateTotal(products));
 
@@ -307,9 +301,7 @@ Bonus:
 Use spread operator.
 */
 
-const getStudentInfo = function(student) {
-
-};
+const getStudentInfo = function (student) {};
 
 console.log(getStudentInfo(student));
 
@@ -340,10 +332,6 @@ Bonus:
 Use reduce() only.
 */
 
-const calculateCategoryTotals = function(orders) {
+const calculateCategoryTotals = function (orders) {};
 
-};
-
-console.log(
-  calculateCategoryTotals(orders)
-);
+console.log(calculateCategoryTotals(orders));
