@@ -99,8 +99,8 @@ Return only product names
 const groupByCategory = function (products) {
   const groupsProduct = products.reduce((acc, item) => {
     const category = item.category;
-    if(!acc[category]){
-        acc[category] = []
+    if (!acc[category]) {
+      acc[category] = [];
     }
     acc[category].push(item);
     return acc;
@@ -136,10 +136,38 @@ Bonus:
 If multiple values have the same count,
 return all of them.
 */
+// solution 1: use reduce() then find max()
 
-const findMostFrequent = function (arr) {};
+function findMostFrequent(arr) {
+  const frequency = arr.reduce((acc, item) => {
+    if (!acc[item]) {
+      acc[item] = 1;
+    } else {
+      acc[item]++;
+    }
 
-console.log(findMostFrequent(["a", "b", "c", "a", "d", "b", "a", "c", "a"]));
+    return acc;
+  }, {});
+
+  let maxValue = null;
+  let maxCount = 0;
+
+  for (const key in frequency) {
+    if (frequency[key] > maxCount) {
+      maxCount = frequency[key];
+      maxValue = key;
+    }
+  }
+
+  return {
+    value: maxValue,
+    count: maxCount
+  };
+}
+
+console.log(
+  findMostFrequent(["a", "b", "c", "a", "d", "b", "a", "c", "a", "b", "b"]),
+);
 
 /*
 4.
