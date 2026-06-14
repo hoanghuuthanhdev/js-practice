@@ -140,28 +140,24 @@ return all of them.
 
 function findMostFrequent(arr) {
   const frequency = arr.reduce((acc, item) => {
-    if (!acc[item]) {
-      acc[item] = 1;
-    } else {
-      acc[item]++;
-    }
-
+    acc[item] = (acc[item] || 0) + 1;
     return acc;
   }, {});
 
-  let maxValue = null;
+  // find the maximum count
   let maxCount = 0;
-
   for (const key in frequency) {
-    if (frequency[key] > maxCount) {
-      maxCount = frequency[key];
-      maxValue = key;
-    }
+    if (frequency[key] > maxCount) maxCount = frequency[key];
   }
 
+  // collect all values that have the maximum count
+  const winners = Object.keys(frequency).filter(
+    (k) => frequency[k] === maxCount,
+  );
+
   return {
-    value: maxValue,
-    count: maxCount
+    value: winners.length === 1 ? winners[0] : winners,
+    count: maxCount,
   };
 }
 
