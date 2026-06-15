@@ -183,7 +183,20 @@ Bonus:
 Do not use flat()
 */
 
-const flattenArray = function (arr) {};
+const flattenArray = function (arr) {
+  const result = [];
+  const helper = (input) => {
+    for (const item of input) {
+      if (Array.isArray(item)) {
+        helper(item);
+      } else {
+        result.push(item);
+      }
+    }
+  };
+  helper(arr);
+  return result;
+};
 
 console.log(flattenArray([1, 2, [3, 4], [5, 6], 7]));
 
