@@ -156,9 +156,12 @@ Expected Output:
 false
 */
 const checkPalindrome = function (str) {
-  let strClear = str.toLowerCase().replaceAll(/\s/g, "");
+  if (typeof str !== "string") return null;
+
+  const strClear = str.toLowerCase().replace(/\s+/g, "");
   let first = 0;
   let last = strClear.length - 1;
+
   while (first < last) {
     if (strClear[first] !== strClear[last]) {
       return false;
@@ -169,7 +172,7 @@ const checkPalindrome = function (str) {
 
   return true;
 };
-const stringCheckPalindrome = "Race   cari";
+const stringCheckPalindrome = "Race car";
 console.log(checkPalindrome(stringCheckPalindrome));
 /*
 6.
