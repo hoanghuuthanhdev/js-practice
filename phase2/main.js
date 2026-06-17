@@ -55,14 +55,6 @@ const removeDuplicates = function (arr) {
 };
 
 console.log(removeDuplicates([3, 7, 2, 3, 9, 7, 5, 2, 8]));
-
-const testadd = function (arr) {
-  return arr.filter((item, index) => {
-    return arr.indexOf(item) === index;
-  });
-};
-
-console.log(testadd([3, 7, 2, 3, 9, 7, 5, 2, 8]));
 /*
 2.
 Requirement:
@@ -96,25 +88,25 @@ Bonus:
 Return only product names
 */
 
-const groupByCategory = function (products) {
+const groupByCategory = function (products, returnNamesOnly = false) {
   const groupsProduct = products.reduce((acc, item) => {
     const category = item.category;
     if (!acc[category]) {
       acc[category] = [];
     }
-    acc[category].push(item);
+    acc[category].push(returnNamesOnly ? item.name : item);
     return acc;
   }, {});
   return groupsProduct;
 };
 
-const products = [
+const categorizedProducts = [
   { name: "Laptop", category: "Electronics" },
   { name: "Phone", category: "Electronics" },
   { name: "Shirt", category: "Clothing" },
   { name: "Apple", category: "Food" },
 ];
-console.log(groupByCategory(products));
+console.log(groupByCategory(categorizedProducts));
 
 /*
 3.
@@ -200,6 +192,46 @@ const flattenArray = function (arr) {
 
 console.log(flattenArray([1, 2, [3, 4], [5, 6], 7]));
 
+const users = [
+  { name: "John", age: 25 },
+  { name: "Mike", age: 15 },
+  { name: "Sarah", age: 30 },
+];
+
+const students = [
+  { name: "John", score: 70 },
+  { name: "Mike", score: 80 },
+  { name: "Sarah", score: 45 },
+];
+
+const stockProducts = [
+  { name: "Laptop", stock: 10 },
+  { name: "Phone", stock: 0 },
+  { name: "Mouse", stock: 5 },
+];
+
+const pricedProducts = [
+  { name: "Laptop", price: 500 },
+  { name: "Phone", price: 300 },
+  { name: "Mouse", price: 50 },
+];
+
+const student = {
+  id: 101,
+  name: "David",
+  scores: {
+    math: 88,
+    english: 92,
+  },
+};
+
+const orders = [
+  { category: "Food", price: 20 },
+  { category: "Electronics", price: 150 },
+  { category: "Food", price: 15 },
+  { category: "Clothing", price: 40 },
+];
+
 /*
 5.
 Requirement:
@@ -225,7 +257,10 @@ Bonus:
 Return only the names.
 */
 
-const filterAdults = function (users) {};
+const filterAdults = function (users, returnNamesOnly = false) {
+  const adults = users.filter((user) => user.age >= 18);
+  return returnNamesOnly ? adults.map((user) => user.name) : adults;
+};
 
 console.log(filterAdults(users));
 
@@ -254,7 +289,19 @@ Bonus:
 Also return the failed students.
 */
 
-const checkPass = function (students) {};
+const checkPass = function (students, includeFailed = false) {
+  const failedStudents = students.filter((student) => student.score < 50);
+  const allPassed = failedStudents.length === 0;
+
+  if (includeFailed) {
+    return {
+      allPassed,
+      failedStudents,
+    };
+  }
+
+  return allPassed;
+};
 
 console.log(checkPass(students));
 
@@ -280,9 +327,17 @@ Bonus:
 Return the product name(s).
 */
 
-const checkStock = function (products) {};
+const checkStock = function (products, returnNamesOnly = false) {
+  const outOfStockProducts = products.filter((product) => product.stock === 0);
 
-console.log(checkStock(products));
+  if (returnNamesOnly) {
+    return outOfStockProducts.map((product) => product.name);
+  }
+
+  return outOfStockProducts.length > 0;
+};
+
+console.log(checkStock(stockProducts));
 
 /*
 8.
@@ -306,9 +361,13 @@ Bonus:
 Apply a 10% discount before calculating.
 */
 
-const calculateTotal = function (products) {};
+const calculateTotal = function (products, discountRate = 0) {
+  return products.reduce((total, product) => {
+    return total + product.price * (1 - discountRate);
+  }, 0);
+};
 
-console.log(calculateTotal(products));
+console.log(calculateTotal(pricedProducts));
 
 /*
 9.
@@ -338,7 +397,15 @@ Bonus:
 Use spread operator.
 */
 
-const getStudentInfo = function (student) {};
+const getStudentInfo = function (student) {
+  const { name, scores: { math = 0, english = 0 } = {} } = student;
+
+  const average = (math + english) / 2;
+
+  return {
+    ...{ name, average },
+  };
+};
 
 console.log(getStudentInfo(student));
 
@@ -369,6 +436,11 @@ Bonus:
 Use reduce() only.
 */
 
-const calculateCategoryTotals = function (orders) {};
+const calculateCategoryTotals = function (orders) {
+  return orders.reduce((acc, order) => {
+    acc[order.category] = (acc[order.category] || 0) + order.price;
+    return acc;
+  }, {});
+};
 
 console.log(calculateCategoryTotals(orders));

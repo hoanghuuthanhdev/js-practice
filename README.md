@@ -1,52 +1,33 @@
 # JS Practice Collection
 
-A collection of JavaScript practice projects focused on fundamental and intermediate front-end skills.
-This repository contains small, independent demos you can open directly in the browser.
+This workspace contains a set of small JavaScript practice projects and browser demos. Everything is built with plain HTML, CSS, and JavaScript so you can open the files directly and practice without any build step.
 
-## Project Structure
+## Included Projects
 
-- `music/`
-  - `index.html`: Music player demo page
-  - `css/style.css`: Styles for the music player
-  - `js/main.js`: Music player logic
-  - `music_mp3/`: Audio files used by the demo
-- `phase1/`
-  - `index.html`: Practice page for JS fundamentals
-  - `index.css`: Styles for Phase 1
-  - `main.js`: JS fundamentals exercises (conditions, loops, functions, etc.)
-- `phase2/`
-  - `main.js`: Arrays and objects exercises
-- `tabUI/`
-  - `index.html`: Tabbed interface demo
-  - `index.css`: Styles for tab UI
-  - `main.js`: Tab interaction logic
+- `phase1/` - JavaScript fundamentals practice
+- `phase2/` - Arrays, objects, and collection exercises
+- `music/` - A custom music player demo
+- `tabUI/` - A tabbed interface demo
 
-## Topics Covered
+## What Each Folder Contains
 
-- Phase 1: JS fundamentals
-  - Variables, data types, operators
-  - Conditionals and loops
-  - Functions, scope, and basic problem solving
-- Phase 2: Arrays and objects
-  - Array methods (`map`, `filter`, `reduce`, `find`, `some`, `every`)
-  - Object manipulation, destructuring, spread operator
-  - Practice tasks like duplicate removal, grouping, and flattening
+- `phase1/index.html` and `phase1/index.css` provide the exercise layout.
+- `phase1/main.js` contains fundamentals solutions such as FizzBuzz, palindrome checks, string reversal, sums, multiplication tables, and a calculator.
+- `phase2/main.js` contains collection solutions such as duplicate removal, grouping, flattening, filtering adults, checking pass/fail, stock checks, totals, destructuring, and category aggregation.
+- `music/index.html`, `music/css/style.css`, and `music/js/main.js` implement the music player UI and playback behavior.
+- `tabUI/index.html`, `tabUI/index.css`, and `tabUI/main.js` implement the tab switching interface.
 
 ## How To Run
 
-You can open each project HTML file directly, or run a local server for smoother testing.
+You can open the HTML files directly in a browser, or use a local server if you want cleaner relative-path handling.
 
-### Option 1: Open directly
-
-Open one of these files in your browser:
+Open directly:
 
 - `music/index.html`
 - `phase1/index.html`
 - `tabUI/index.html`
 
-### Option 2: Use a local server (recommended)
-
-From the project root:
+Run a local server from the project root:
 
 ```bash
 python -m http.server 8000
@@ -58,17 +39,14 @@ Then open:
 - `http://localhost:8000/phase1/`
 - `http://localhost:8000/tabUI/`
 
-You can also use VS Code Live Server.
+## Notes
 
-## Development Notes
-
-- No build tools or package installation required.
-- All projects are plain HTML/CSS/JS.
-- Use browser DevTools for debugging.
-- You can add your own exercises in `phase1/main.js` and `phase2/main.js`.
+- No package installation or build step is required.
+- The exercises are meant to be edited directly while learning.
+- `phase1/main.js` and `phase2/main.js` log example results to the console so you can compare outputs quickly.
 
 ## Suggested Next Steps
 
-- Add dedicated README files inside each project folder.
-- Add screenshots/GIFs for each demo.
-- Add small test cases for exercise functions.
+- Add screenshots for `music/` and `tabUI/`.
+- Split each phase into smaller exercise files if you want cleaner study notes.
+- Add short inline comments or test cases for each practice function.

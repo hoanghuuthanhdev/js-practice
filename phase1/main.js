@@ -241,8 +241,9 @@ const checkDupicate = function (arr) {
       seen.add(arr[i]);
     }
   }
-  console.log(duplicate);
-  return duplicate;
+  const result = [...duplicate];
+  console.log(result);
+  return result;
 };
 const checkDupicateArr = [1, 2, 3, 2, 4, 5, 1];
 
