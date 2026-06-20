@@ -49,9 +49,6 @@ Bonus:
 Allow custom punctuation
 */
 
-
-
-
 /*
 2.
 Requirement:
@@ -79,9 +76,6 @@ Bonus:
 Add a reset() method
 */
 
-
-
-
 /*
 3.
 Requirement:
@@ -107,9 +101,6 @@ Rules:
 Bonus:
 Prevent negative balances
 */
-
-
-
 
 /*
 4.
@@ -137,9 +128,6 @@ Bonus:
 Add clear() method
 */
 
-
-
-
 /*
 5.
 Requirement:
@@ -158,9 +146,6 @@ Questions:
 - What happens during hoisting?
 */
 
-
-
-
 /*
 6.
 Requirement:
@@ -178,9 +163,6 @@ Questions:
 - Why does this happen?
 - Explain TDZ
 */
-
-
-
 
 /*
 7.
@@ -212,9 +194,6 @@ Bonus:
 Solve without changing var
 */
 
-
-
-
 /*
 8.
 Requirement:
@@ -236,9 +215,6 @@ Rules:
 Bonus:
 Create multiplyBy3 and multiplyBy10
 */
-
-
-
 
 /*
 9.
@@ -267,9 +243,6 @@ Bonus:
 Add getCount()
 */
 
-
-
-
 /*
 10.
 Requirement:
@@ -292,9 +265,6 @@ Expected Output:
 Questions:
 - What does this refer to?
 */
-
-
-
 
 /*
 11.
@@ -321,9 +291,6 @@ Questions:
 - Why is the result different?
 - What does this refer to?
 */
-
-
-
 
 /*
 12.
@@ -353,9 +320,6 @@ Bonus:
 Solve with bind()
 */
 
-
-
-
 /*
 13.
 Requirement:
@@ -375,9 +339,6 @@ Rules:
 Bonus:
 Add age property
 */
-
-
-
 
 /*
 14.
@@ -400,9 +361,6 @@ Rules:
 Bonus:
 Verify with hasOwnProperty()
 */
-
-
-
 
 /*
 15.
@@ -427,9 +385,6 @@ Bonus:
 Add year property
 */
 
-
-
-
 /*
 16.
 Requirement:
@@ -449,9 +404,6 @@ Questions:
 Bonus:
 Draw the prototype chain
 */
-
-
-
 
 /*
 17.
@@ -476,9 +428,6 @@ Bonus:
 Add age property
 */
 
-
-
-
 /*
 18.
 Requirement:
@@ -499,9 +448,6 @@ Animal sound
 Bonus:
 Return the animal name too
 */
-
-
-
 
 /*
 19.
@@ -525,9 +471,6 @@ Rules:
 Bonus:
 Call parent constructor using super()
 */
-
-
-
 
 /*
 20.
@@ -559,3 +502,275 @@ Rules:
 Bonus:
 Use private fields (#users)
 */
+
+console.log("Phase 3 Solutions Starting");
+
+// 1. createGreeting
+function createGreeting(message, punctuation = "") {
+  return function (name) {
+    const output = `${message} ${name}${punctuation}`;
+    console.log(output);
+    return output;
+  };
+}
+
+const greet = createGreeting("Hello");
+greet("John");
+
+// 2. createCounter
+function createCounter() {
+  let count = 0;
+
+  function counter() {
+    count += 1;
+    console.log(count);
+    return count;
+  }
+
+  counter.reset = function () {
+    count = 0;
+    return count;
+  };
+
+  return counter;
+}
+
+const counter = createCounter();
+counter();
+counter();
+counter();
+
+// 3. createBankAccount
+function createBankAccount(initialBalance = 0) {
+  let balance = initialBalance;
+
+  return {
+    deposit(amount) {
+      if (typeof amount !== "number" || amount < 0) return balance;
+      balance += amount;
+      return balance;
+    },
+    withdraw(amount) {
+      if (typeof amount !== "number" || amount < 0) return balance;
+      if (amount > balance) return balance;
+      balance -= amount;
+      return balance;
+    },
+    getBalance() {
+      console.log(balance);
+      return balance;
+    },
+  };
+}
+
+const account = createBankAccount(1000);
+account.deposit(500);
+account.withdraw(200);
+account.getBalance();
+
+// 4. createMemory
+function createMemory() {
+  const values = [];
+
+  function remember(value) {
+    values.push(value);
+    console.log([...values]);
+    return [...values];
+  }
+
+  remember.clear = function () {
+    values.length = 0;
+    return values;
+  };
+
+  return remember;
+}
+
+const remember = createMemory();
+remember("A");
+remember("B");
+remember("C");
+
+// 5. Hoisting with var
+// console.log(a); -> undefined because `var a` is hoisted and initialized with undefined.
+// var a = 10;
+
+// 6. TDZ with let
+// console.log(b); -> ReferenceError because `let b` is in the temporal dead zone until initialized.
+// let b = 20;
+
+// 7. Fix the loop output without changing var
+for (var i = 0; i < 3; i++) {
+  setTimeout(
+    (value) => {
+      console.log(value);
+    },
+    100,
+    i,
+  );
+}
+
+// 8. multiplier
+function multiplier(factor) {
+  return function (value) {
+    const output = factor * value;
+    console.log(output);
+    return output;
+  };
+}
+
+const multiplyBy2 = multiplier(2);
+multiplyBy2(5);
+
+// 9. createCallTracker
+function createCallTracker() {
+  let count = 0;
+
+  function tracker() {
+    count += 1;
+    const output = `Function called ${count} time(s)`;
+    console.log(output);
+    return output;
+  }
+
+  tracker.getCount = function () {
+    return count;
+  };
+
+  return tracker;
+}
+
+const tracker = createCallTracker();
+tracker();
+tracker();
+tracker();
+
+// 10. this in method call
+// person.sayName(); -> "John"
+
+// 11. detached method call
+// const fn = person.sayName; fn(); -> usually empty string in a browser, because `this` becomes `window`.
+
+// 12. Fix this inside setTimeout
+const personForTimeout = {
+  name: "John",
+
+  greet() {
+    setTimeout(() => {
+      console.log(this.name);
+    }, 1000);
+  },
+};
+
+personForTimeout.greet();
+
+// 13. Constructor function Person
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+const p1 = new Person("John");
+console.log(p1.name === "John");
+
+// 14. Method on prototype
+Person.prototype.sayHello = function () {
+  const output = `Hello ${this.name}`;
+  console.log(output);
+  return output;
+};
+
+console.log(p1.sayHello());
+console.log(p1.hasOwnProperty("sayHello"));
+console.log(Person.prototype.hasOwnProperty("sayHello"));
+
+// 15. Car constructor with prototype method
+function Car(brand, year) {
+  this.brand = brand;
+  this.year = year;
+}
+
+Car.prototype.getBrand = function () {
+  console.log(this.brand);
+  return this.brand;
+};
+
+const car = new Car("Toyota");
+car.getBrand();
+
+// 16. Prototype chain answers
+// push() and map() come from Array.prototype.
+// toString() comes from Object.prototype for arrays via the prototype chain.
+// The end of the prototype chain is null.
+
+// 17. class syntax version of Person
+class PersonClass {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  sayHello() {
+    const output = `Hello ${this.name}`;
+    console.log(output);
+    return output;
+  }
+}
+
+const p2 = new PersonClass("John");
+p2.sayHello();
+
+// 18. Animal class
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    const output = `Animal sound${this.name ? ` (${this.name})` : ""}`;
+    console.log(output);
+    return output;
+  }
+}
+
+const animal = new Animal("Buddy");
+animal.speak();
+
+// 19. Dog class that extends Animal
+class Dog extends Animal {
+  constructor(name) {
+    super(name);
+  }
+
+  speak() {
+    const output = "Woof!";
+    console.log(output);
+    return output;
+  }
+}
+
+const dog = new Dog("Buddy");
+dog.speak();
+
+// 20. UserManager with private field
+class UserManager {
+  #users = [];
+
+  addUser(name) {
+    this.#users.push(name);
+  }
+
+  removeUser(name) {
+    this.#users = this.#users.filter((user) => user !== name);
+  }
+
+  getUsers() {
+    console.log([...this.#users]);
+    return [...this.#users];
+  }
+}
+
+const manager = new UserManager();
+manager.addUser("John");
+manager.addUser("Mike");
+manager.getUsers();
