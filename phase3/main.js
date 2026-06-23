@@ -139,7 +139,7 @@ var a = 10;
 
 Expected Output:
 
-???
+undefined
 
 Questions:
 - Why?
@@ -157,7 +157,7 @@ let b = 20;
 
 Expected Output:
 
-???
+ReferenceError: Cannot access 'b' before initialization
 
 Questions:
 - Why does this happen?
@@ -260,7 +260,7 @@ person.sayName();
 
 Expected Output:
 
-???
+John
 
 Questions:
 - What does this refer to?
@@ -285,7 +285,7 @@ fn();
 
 Expected Output:
 
-???
+undefined
 
 Questions:
 - Why is the result different?
